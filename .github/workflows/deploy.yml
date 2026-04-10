@@ -1,0 +1,32 @@
+name: Deploy Portfolio Website
+
+# This tells GitHub to run this script every time you push to the 'main' branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Grab the latest code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Log into AWS using your secure secrets
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1 # CHANGE THIS if your bucket is in a different region
+
+      # 3. Push the new HTML files to your S3 bucket
+      - name: Sync files to S3
+        run: aws s3 sync . s3://myportfoliosite-portfoliobucket-n7pabfwr76gz  --exclude ".git/*" --exclude ".github/*"
+
+      # 4. Force CloudFront to clear its edge cache immediately
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id E2AIUCW63OHPIS --paths "/*"

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rawhi Al-Sharif | AWS Certified Portfolio</title>
+    <style>
+        /* Modern CSS Variables for easy color/theme updates */
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #2d3436;
+            --accent-color: #0077b6; /* Professional blue */
+            --accent-hover: #0096c7;
+            --card-bg: #ffffff;
+            --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        /* Basic Reset and Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        /* Sticky Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--card-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 10%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section (The Main Landing Area) */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+            background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(244,247,246,1) 100%);
+            margin-top: 60px; /* Offset for sticky nav */
+        }
+
+        /* Intro Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+            opacity: 0; /* Hidden initially for animation */
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        /* Call-to-Action Buttons */
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 1.1s;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+        }
+
+        .btn-filled {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-filled:hover {
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,119,182,0.3);
+        }
+
+        .btn-outline {
+            color: var(--accent-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,119,182,0.1);
+        }
+
+        /* Common Section Styling (For adding content later) */
+        section {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+        }
+
+        /* Placeholder Projects Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border-top: 4px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .project-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Responsive Design for smaller screens */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero h2 { font-size: 1.2rem; }
+            .nav-links { gap: 1rem; font-size: 0.9rem; }
+            .logo { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Rawhi Al-Sharif</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <h1>Rawhi Al-Sharif</h1>
+        <h2>AWS Certified Cloud Practitioner</h2>
+        <p>
+            An aspiring Cloud Architect and Backend Developer focused on designing secure, cost-effective, and scalable enterprise systems on AWS.
+        </p>
+        <div class="cta-container">
+            <a href="#projects" class="btn btn-filled">View My Work</a>
+            <a href="mailto:your-email-here@gmail.com" class="btn btn-outline">Contact Me</a>
+        </div>
+    </header>
+
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.2rem; color: #555;">
+                Welcome to my digital portfolio! I am a passionate technologist bridging the gap between networking infrastructure (CCNA) and modern cloud architecture (AWS). This website is hosted entirely serverless using the AWS Free Tier, leveraging S3 and CloudFront.
+            </p>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Key Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>Serverless Portfolio Site</h3>
+                <p>Infrastructure as Code project. Automated the deployment of this static website using AWS CloudFormation, S3, and CloudFront.</p>
+            </div>
+            <div class="project-card">
+                <h3>University Registration Simulation</h3>
+                <p>Backend simulation built with Python, pandas, and NumPy. Planned migration to AWS Lambda and DynamoDB.</p>
+            </div>
+            <div class="project-card">
+                <h3>Enterprise Network Simulations</h3>
+                <p>Series of virtualized labs showcasing VLAN configuration, OSPF routing, and network security protocols based on CCNA curriculum.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="text-align: center;">
+        <h2 class="section-title">Get In Touch</h2>
+        <p style="margin-bottom: 2rem;">I am actively seeking opportunities in Cloud Architecture and Enterprise Backend Development.</p>
+        <a href="mailto:your-email@example.com" class="btn btn-filled">Email Me</a>
+        </section>
+
+    <footer>
+        <p>&copy; 2026 Rawhi Al-Sharif. Successfully hosted on the AWS Free Tier.</p>
+        
+        <p id="visitor-count" style="margin-top: 10px; font-weight: bold; color: var(--accent-color);">
+            Waking up the serverless backend...
+        </p>
+    </footer>
+
+    <script>
+        // PASTE YOUR LAMBDA URL HERE (Keep the quotation marks!)
+        const apiUrl = "https://nnzn6oiexfytne4vxciqaqjpsi0xzohr.lambda-url.eu-north-1.on.aws/";
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('visitor-count').innerText = "This portfolio has been viewed " + data.count + " times.";
+            })
+            .catch(error => {
+                console.error('Error fetching visitor count:', error);
+                document.getElementById('visitor-count').innerText = "Visitor counter temporarily offline.";
+            });
+    </script>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
